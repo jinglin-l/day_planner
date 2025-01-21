@@ -4,44 +4,57 @@ import os
 import re
 from dotenv import load_dotenv
 from datetime import timedelta
+from gcal_service import GoogleCalendarService
+from logger_config import setup_logger
 
 load_dotenv()
 
+logger = setup_logger()
+
 
 def read_kanban_file(filename):
-    # Get the path to the parent directory
-    parent_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    # Construct the full path to kanban.md
-    kanban_path = os.path.join(parent_dir, filename)
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    obsidian_dir = os.path.dirname(script_dir)
+    kanban_path = os.path.join(obsidian_dir, filename)
+    print(f"🔍 Looking for kanban file at: {kanban_path}")
     with open(kanban_path, 'r') as file:
         return file.read()
 
 
 def call_claude(kanban_content):
     client = anthropic.Anthropic(api_key=os.environ.get("ANTHROPIC_API_KEY"))
+    print("🤖 Delegating all life decisions to Claude...")
 
+    
+    calendar_service = GoogleCalendarService()
+    tomorrow = datetime.date.today() + datetime.timedelta(days=1)
+    calendar_events = calendar_service.get_events(tomorrow)
+    
     prompt = f"""
-    Based on the following Kanban board content and context, create a detailed day plan for tomorrow:
+    Based on the following Kanban board content, calendar events, and context, create a detailed day plan for tomorrow:
 
     Kanban Board Content:
     {kanban_content}
 
+    Calendar Events for {tomorrow.strftime('%Y-%m-%d')}:
+    {calendar_events}
+
     Context. You MUST follow these instructions:
     - This schedule is generated every night at 10:00pm for the following day. 
-    - Tasks should be timeboxed - focus on allocated time blocks rather than completion goals (e.g., "2hr block for leetcode practice")
-    - Include at least one social interaction block daily (e.g., quality conversation, coffee with friend)
-    - After 2 hours of focused work, take a 30 minute break
+    - Structure the day around 4 two-hour focus blocks, working around calendar events
+    - After each 2-hour focus block, take a 30-minute break
+    - Include at least one meaningful social interaction daily (e.g., coffee with a friend, quality conversation)
     - I sleep from 12am-8:30am. I need about 30 minutes to get ready in the morning. 
     - 11pm-12am is for my wind down time.
-    - Every Sunday from 1-4pm: Playspace
     - Tasks are prioritized as high, medium, and low. Prioritize high priority tasks first, then medium, then low.
     - There is a daily column for tasks that need to be done every day.
 
-    Please create a schedule that takes into account these fixed commitments and prioritizes tasks accordingly. Format the output EXACTLY as follows. Do not fill in the thought dump or things I'm grateful for sections, only the tasks:
+    Please create a schedule that takes into account these fixed commitments and prioritizes tasks accordingly. 
+    Format the output EXACTLY as follows. Mark focus blocks with ###:
 
     # Day Planner
-    - [ ] [TimeStart-TimeEnd] [Task]
-    ...
+    - [ ] [TimeStart-TimeEnd] Regular task
+    - [ ] [TimeStart-TimeEnd] ### Focus Block: [Description]
 
     # Thought Dump
 
@@ -51,12 +64,13 @@ def call_claude(kanban_content):
 
     Ensure tasks are appropriately timed and include breaks. Add any necessary additional tasks or breaks to create a balanced day.
     Do not include a date or day of the week in the output.
+    IMPORTANT: Leave the Thought Dump, Things I'm Grateful For, and Scary Things sections completely empty - do not add any content to these sections.
     """
 
     message = client.messages.create(
         model="claude-3-opus-20240229",
         max_tokens=4000,
-        temperature=0.7,
+        temperature=0.01,
         system="You are a helpful assistant that creates detailed daily schedules based on Kanban board content and user context.",
         messages=[
             {"role": "user", "content": prompt}
@@ -76,27 +90,64 @@ def preprocess_schedule(schedule, date):
     schedule = str(schedule)
     schedule = re.sub(r'TextBlock\(text="(.*?)"\)', r'\1', schedule, flags=re.DOTALL)
     schedule = schedule.encode().decode('unicode_escape')
-
-    # Remove everything before "# Day Planner"
+    
+    print("\n🔍 DEBUG: Schedule content before processing:")
+    print(schedule)
+    print("\n🔍 DEBUG: Looking for pattern:")
+    print(r'\[ \] \[(\d{2}:\d{2})-(\d{2}:\d{2})\] ### Focus Block: (.*?)(?=\n|$)')
+    
+    # Remove claude's preamble yap
     schedule = re.sub(r'^.*?# Day Planner', '# Day Planner', schedule, flags=re.DOTALL)
-
-    # Remove any date or day of week that Claude might have included
     schedule = re.sub(r'^# Schedule for .*?\n', '', schedule, flags=re.MULTILINE)
 
-    # Ensure the "Things I'm Grateful For" section is present and has numbered items
-    # Ensure sections are empty
+    # Ensure journal prompt sections are empty
     schedule = re.sub(r'(# Thought Dump\s*)(1\..*?)(#|$)', r'\1\n\3', schedule, flags=re.DOTALL)
     schedule = re.sub(r'(# Things I\'m Grateful For\.\.\.\s*)(1\..*?)(#|$)', r'\1\n\3', schedule, flags=re.DOTALL)
     schedule = re.sub(r'(# Scary thing\(s\) I did today\.\.\.\s*)(1\..*?)($)', r'\1\n', schedule, flags=re.DOTALL)
 
+    focus_blocks = re.findall(r'\[ \] \[(\d{1,2}:\d{2}(?:am|pm)?)-(\d{1,2}:\d{2}(?:am|pm)?)\] ### Focus Block: (.*?)(?=\n|$)', schedule)
+    
+    if focus_blocks:
+        print(f"\n📅 Found {len(focus_blocks)} focus blocks to add to calendar")
+        print("Focus blocks found:", focus_blocks)
+        
+        # Write focus blocks to GCal
+        calendar_service = GoogleCalendarService()
+        for start_time, end_time, description in focus_blocks:
+            # Convert times from AM/PM format to datetime
+            start_dt = datetime.datetime.combine(
+                date,
+                datetime.datetime.strptime(start_time.strip().upper(), '%I:%M%p').time()
+            )
+            end_dt = datetime.datetime.combine(
+                date,
+                datetime.datetime.strptime(end_time.strip().upper(), '%I:%M%p').time()
+            )
+            
+            print(f"Creating calendar event: {start_dt} - {end_dt}: {description}")
+            calendar_service.create_event(
+                summary=description,
+                start_time=start_dt,
+                end_time=end_dt,
+                description="Deep work session generated by Day Planner"
+            )
+    else:
+        print("❌ No focus blocks found in schedule")
+    
     return schedule.strip()
 
 
-def create_daily_file(date, schedule):
-    filename = date.strftime("%Y-%m-%d.md")
-    with open(filename, 'w') as file:
+def write_schedule_to_file(schedule, date):
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    journal_dir = os.path.join(os.path.dirname(current_dir), 'journal')
+    
+    os.makedirs(journal_dir, exist_ok=True)
+    
+    file_path = os.path.join(journal_dir, f"{date.strftime('%Y-%m-%d')}.md")
+    
+    with open(file_path, 'w') as file:
         file.write(schedule)
-    print(f"Created schedule file: {filename}")
+    print(f"📝 Schedule written to {file_path}")
 
 
 def generate_markdown():
@@ -107,7 +158,7 @@ def generate_markdown():
 
 # Schedule
 
-# Scary things I did today
+# Scary/Hard things I Challenged Myself To Do Today
 
 # Notes
 
@@ -117,18 +168,18 @@ def generate_markdown():
 
 def main():
     try:
-        kanban_content = read_kanban_file('../kanban.md')
+        logger.info("Starting day planner script...")
+        kanban_content = read_kanban_file('kanban.md')
         tomorrow = datetime.date.today() + datetime.timedelta(days=1)
 
         claude_schedule = call_claude(kanban_content)
         processed_schedule = preprocess_schedule(claude_schedule, tomorrow)
-        create_daily_file(tomorrow, processed_schedule)
-        print("Schedule created successfully!")
+        write_schedule_to_file(processed_schedule, tomorrow)
+        logger.info("✅ Schedule created successfully!")
     except Exception as e:
-        print(f"An error occurred: {str(e)}")
-        # Uncomment the following lines for more detailed error information:
+        logger.error(f"❌ An error occurred: {str(e)}")
         import traceback
-        print(traceback.format_exc())
+        logger.error(traceback.format_exc())
 
 
 if __name__ == "__main__":

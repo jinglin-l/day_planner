@@ -6,29 +6,56 @@ import datetime
 import os
 import pickle
 from typing import List, Dict
+import logging
 
-SCOPES = ['https://www.googleapis.com/auth/calendar.readonly']
+logger = logging.getLogger('dayplanner')
+
+SCOPES = ['https://www.googleapis.com/auth/calendar']
 
 
 class GoogleCalendarService:
     def __init__(self):
         self.service = self._get_calendar_service()
 
+        # Verify permissions
+        try:
+            calendar_list = self.service.calendarList().list().execute()
+            logger.info("✅ Successfully connected to Google Calendar")
+            logger.info(f"📅 Primary Calendar ID: {calendar_list['items'][0]['id']}")
+        except Exception as e:
+            logger.error("❌ Error accessing Google Calendar:")
+            logger.error(str(e))
+            raise
+
     def _get_calendar_service(self):
         """Initialize and return the Google Calendar service."""
         creds = None
+        # Look for existing token.pickle file
         if os.path.exists('token.pickle'):
             with open('token.pickle', 'rb') as token:
                 creds = pickle.load(token)
 
+        # If credentials are invalid or don't exist, try to refresh or create new ones
         if not creds or not creds.valid:
             if creds and creds.expired and creds.refresh_token:
-                creds.refresh(Request())
-            else:
-                flow = InstalledAppFlow.from_client_secrets_file(
-                    'credentials.json', SCOPES)
-                creds = flow.run_local_server(port=0)
-            with open('token.pickle', 'wb') as token:
+                try:
+                    creds.refresh(Request())
+                except Exception:
+                    creds = None
+            
+            if not creds:
+                try:
+                    flow = InstalledAppFlow.from_client_secrets_file(
+                        'credentials.json', SCOPES)
+                    creds = flow.run_local_server(port=0)
+                except FileNotFoundError:
+                    raise FileNotFoundError(
+                        "credentials.json not found in day_planner directory. "
+                        "Please ensure you have downloaded your OAuth credentials file from Google Cloud Console."
+                    )
+
+            # Save the credentials for future use
+            with open('day_planner/token.pickle', 'wb') as token:
                 pickle.dump(creds, token)
 
         return build('calendar', 'v3', credentials=creds)
@@ -68,3 +95,36 @@ class GoogleCalendarService:
             })
 
         return formatted_events
+
+    def create_event(self, summary, start_time, end_time, description=None):
+        """Create a new calendar event."""
+        logger.info(f"\n🔍 Attempting to create event: {summary}")
+        logger.info(f"Start: {start_time}")
+        logger.info(f"End: {end_time}")
+        
+        event = {
+            'summary': f"🎯 {summary} ⚡️",
+            'description': description,
+            'start': {
+                'dateTime': start_time.isoformat(),
+                'timeZone': 'America/Los_Angeles',
+            },
+            'end': {
+                'dateTime': end_time.isoformat(),
+                'timeZone': 'America/Los_Angeles',
+            },
+            'reminders': {
+                'useDefault': True
+            },
+        }
+
+        try:
+            response = self.service.events().insert(calendarId='primary', body=event).execute()
+            logger.info(f"✅ Successfully created event:")
+            logger.info(f"  ID: {response.get('id')}")
+            logger.info(f"  Link: {response.get('htmlLink')}")
+            return response
+        except Exception as e:
+            logger.error(f"❌ Error creating calendar event: {str(e)}")
+            logger.error(f"Full error details: {type(e).__name__}")
+            raise
