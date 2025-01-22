@@ -1,12 +1,12 @@
 # Claude Day Planner
 
-Are you utilizing your time in a way that's congruent with your value system & what you want to achieve? 
+Are you utilizing your time in a way that's congruent with your value system & what you want to achieve? If not, a personzlized day planner can help you get there. 
 
 ## Philosophy & Motivation
 I built this tool because I needed a better way to project-manage my life and address the ever-expanding backlog of things I intend to do, but somehow never get to. 
 
 ### Core Workflow
-Throughout my day, I maintain a Kanban board in Obsidian to capture and prioritize tasks. It's super easy to set up - just install the community plugins. I use [this one](https://github.com/mgmeyers/obsidian-kanban)
+Throughout my day, I maintain a Kanban board in Obsidian to capture and prioritize tasks. It's simple easy to set up - just install a kanban board from the community plugins. I use [this one](https://github.com/mgmeyers/obsidian-kanban)
 
 Each night at 10 PM, my planner:
 
@@ -15,21 +15,20 @@ Each night at 10 PM, my planner:
 - Consults with Claude to create a schedule for the next day
 - Automatically blocks out focused work sessions and writes them back to my Google Calendar
 
-### Design Philosophy
 
 ### Design Philosophy
 
-- **Deep Work Focus**  
-I structure my day around four 2-3 hour focus blocks. I find this is the sweet spot for me. 
+- **Deep Work Focus** 🧠  
+I structure my day around four 2-hour focus blocks. This maximizes my potential for concentrated effort - it's when I get my best work done.
 
-- **Managing My Human Limitations**  
-I unfortunately suffer from being human, which means to be productive, I actually need built-in breaks for fun, exercise, sleep, and seeing friends!
+- **Managing My Human Limitations** 🤖  
+I unfortunately suffer from being human, which means to be productive, I actually need built-in breaks for fun, exercise, sleep, and seeing friends! My energy management is critical - I've learned the hard way what drains me (like low blood sugar or boring trapped conversations) and what energizes me (like good conversations with interesting people or building something cool).
 
-- **Minimizing Decision Making**  
-I realized my decision-making in the moment tends to be very poor (depleted willpower, emotional state, or immediate pressures). By automating my schedule creation, I preserve mental energy for actual execution. Removing the cognitive load of constantly deciding "what should I do next?" frees up mental resources for the work itself.
+- **Minimizing Decision Making** 🧩  
+I realized my decision-making in the moment tends to be very poor (gahhh depleted willpower, emotional state, or immediate pressures). By automating my schedule creation, I'm preserving my mental energy for actual work instead of deciding "what should I do next?"
 
-- **Building Sustainable Systems**  
-Systems help me create a foundation for building good habits!
+- **Building Sustainable Systems** 🔄  
+Systems help me create a foundation for building good habits by removing reliance on willpower or motivation. When the right action becomes the default action, I no longer need to convince myself to do it each time. It's about making the good choices the easy choices.
 
 ### Prerequisites
 
