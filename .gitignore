@@ -1,5 +1,6 @@
 credentials.json
 token.pickle
 .env
-*.md
 __pycache__/
+dayplanner_logs/
+.dayplanner_pause
