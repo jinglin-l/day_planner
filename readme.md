@@ -1,6 +1,6 @@
 # Claude Day Planner
 
-Are you utilizing your time in a way that's congruent with your value system & what you want to achieve? If not, a personzlized day planner can help you get there. 
+Are you utilizing your time in a way that's congruent with your value system & what you want to achieve? If not, a personzlized day planner can help you get there!!! 
 
 ## Philosophy & Motivation
 I built this tool because I needed a better way to project-manage my life and address the ever-expanding backlog of things I intend to do, but somehow never get to. 
@@ -10,25 +10,25 @@ Throughout my day, I maintain a Kanban board in Obsidian to capture and prioriti
 
 Each night at 10 PM, my planner:
 
-- Analyzes my Kanban board to understand my task landscape
-- Checks my Google Calendar for existing commitments
+- Analyzes my Kanban board to understand my my everexpanding backlog of things I intend to do
+- Checks my Google Calendar for existing commitments that are already scheduled
 - Consults with Claude to create a schedule for the next day
-- Automatically blocks out focused work sessions and writes them back to my Google Calendar
+- Automatically blocks out focused work sessions and writes them back to my Google Calendar as events
 
 
 ### Design Philosophy
 
 - **Deep Work Focus** 🧠  
-I structure my day around four 2-hour focus blocks. This maximizes my potential for concentrated effort - it's when I get my best work done.
+I structure my day around four 2-hour focus blocks. This maximizes my potential for concentrated effort & reduces decision fatigue and context switching.
 
-- **Managing My Human Limitations** 🤖  
-I unfortunately suffer from being human, which means to be productive, I actually need built-in breaks for fun, exercise, sleep, and seeing friends! My energy management is critical - I've learned the hard way what drains me (like low blood sugar or boring trapped conversations) and what energizes me (like good conversations with interesting people or building something cool).
+- **Managing My Humanness** 🤖  
+I unfortunately suffer from being human, which means to be productive, I actually need built-in breaks for fun, exercise, sleep, and seeing friends! My energy management is seomthing I pay attention to and I've learned that what drains me (like being hangry or being bored in trapped conversations) and what energizes me (people or building something cool that I'm proud of).
 
 - **Minimizing Decision Making** 🧩  
 I realized my decision-making in the moment tends to be very poor (gahhh depleted willpower, emotional state, or immediate pressures). By automating my schedule creation, I'm preserving my mental energy for actual work instead of deciding "what should I do next?"
 
 - **Building Sustainable Systems** 🔄  
-Systems help me create a foundation for building good habits by removing reliance on willpower or motivation. When the right action becomes the default action, I no longer need to convince myself to do it each time. It's about making the good choices the easy choices.
+Systems help me create a foundation for building good habits by removing reliance on willpower or motivation. When my desired action becomes the default action, I no longer need to convince myself to do it each time. It's about making the good choices the easy choices.
 
 ### Prerequisites
 
