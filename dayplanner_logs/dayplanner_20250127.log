@@ -1,0 +1,42 @@
+2025-01-27 22:00:07,972 - INFO - Starting day planner script...
+2025-01-27 22:00:09,086 - INFO - ✅ Successfully connected to Google Calendar
+2025-01-27 22:00:09,087 - INFO - 📅 Primary Calendar ID: c_ritfi48pp9ld7atshj6uu5q6r4@group.calendar.google.com
+2025-01-27 22:00:10,330 - ERROR - ❌ An error occurred: Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}}
+2025-01-27 22:00:10,338 - ERROR - Traceback (most recent call last):
+  File "/Users/jinglinli/Documents/obsidian/day_planner/dayplanner.py", line 175, in main
+    claude_schedule = call_claude(kanban_content)
+  File "/Users/jinglinli/Documents/obsidian/day_planner/dayplanner.py", line 70, in call_claude
+    message = client.messages.create(
+        model="claude-3-opus-20240229",
+    ...<5 lines>...
+        ]
+    )
+  File "/Users/jinglinli/Documents/obsidian/.venv/lib/python3.13/site-packages/anthropic/_utils/_utils.py", line 275, in wrapper
+    return func(*args, **kwargs)
+  File "/Users/jinglinli/Documents/obsidian/.venv/lib/python3.13/site-packages/anthropic/resources/messages/messages.py", line 901, in create
+    return self._post(
+           ~~~~~~~~~~^
+        "/v1/messages",
+        ^^^^^^^^^^^^^^^
+    ...<22 lines>...
+        stream_cls=Stream[RawMessageStreamEvent],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/jinglinli/Documents/obsidian/.venv/lib/python3.13/site-packages/anthropic/_base_client.py", line 1279, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jinglinli/Documents/obsidian/.venv/lib/python3.13/site-packages/anthropic/_base_client.py", line 956, in request
+    return self._request(
+           ~~~~~~~~~~~~~^
+        cast_to=cast_to,
+        ^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+        retries_taken=retries_taken,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/jinglinli/Documents/obsidian/.venv/lib/python3.13/site-packages/anthropic/_base_client.py", line 1060, in _request
+    raise self._make_status_error_from_response(err.response) from None
+anthropic.BadRequestError: Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}}
+

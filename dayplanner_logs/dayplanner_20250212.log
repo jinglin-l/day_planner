@@ -1,0 +1,48 @@
+2025-02-12 14:00:05,859 - INFO - Starting day planner script...
+2025-02-12 14:00:06,647 - INFO - ✅ Successfully connected to Google Calendar
+2025-02-12 14:00:06,647 - INFO - 📅 Primary Calendar ID: c_ritfi48pp9ld7atshj6uu5q6r4@group.calendar.google.com
+2025-02-12 14:00:27,434 - INFO - ✅ Successfully connected to Google Calendar
+2025-02-12 14:00:27,435 - INFO - 📅 Primary Calendar ID: c_ritfi48pp9ld7atshj6uu5q6r4@group.calendar.google.com
+2025-02-12 14:00:27,443 - INFO - 
+🔍 Attempting to create event: Work on high priority tasks from Kanban board
+2025-02-12 14:00:27,443 - INFO - Start: 2025-02-13 11:30:00
+2025-02-12 14:00:27,443 - INFO - End: 2025-02-13 12:00:00
+2025-02-12 14:00:27,964 - INFO - ✅ Successfully created event:
+2025-02-12 14:00:27,965 - INFO -   ID: hh95kn8kv4u2h1k3q24havvq4c
+2025-02-12 14:00:27,965 - INFO -   Link: https://www.google.com/calendar/event?eid=aGg5NWtuOGt2NHUyaDFrM3EyNGhhdnZxNGMgbGkwMDI1NTdAdW1uLmVkdQ
+2025-02-12 14:00:27,965 - INFO - 
+🔍 Attempting to create event: Work on high priority tasks from Kanban board
+2025-02-12 14:00:27,966 - INFO - Start: 2025-02-13 12:30:00
+2025-02-12 14:00:27,966 - INFO - End: 2025-02-13 13:00:00
+2025-02-12 14:00:28,560 - INFO - ✅ Successfully created event:
+2025-02-12 14:00:28,563 - INFO -   ID: pblo4c7jl1c4f4ust2skv8qu44
+2025-02-12 14:00:28,563 - INFO -   Link: https://www.google.com/calendar/event?eid=cGJsbzRjN2psMWM0ZjR1c3Qyc2t2OHF1NDQgbGkwMDI1NTdAdW1uLmVkdQ
+2025-02-12 14:00:28,564 - INFO - 
+🔍 Attempting to create event: Leetcode practice
+2025-02-12 14:00:28,564 - INFO - Start: 2025-02-13 13:30:00
+2025-02-12 14:00:28,564 - INFO - End: 2025-02-13 15:30:00
+2025-02-12 14:00:29,066 - INFO - ✅ Successfully created event:
+2025-02-12 14:00:29,066 - INFO -   ID: i6d8in1sk92qk0oqpks8i8kftk
+2025-02-12 14:00:29,066 - INFO -   Link: https://www.google.com/calendar/event?eid=aTZkOGluMXNrOTJxazBvcXBrczhpOGtmdGsgbGkwMDI1NTdAdW1uLmVkdQ
+2025-02-12 14:00:29,067 - INFO - 
+🔍 Attempting to create event: Work on medium priority tasks from Kanban board
+2025-02-12 14:00:29,067 - INFO - Start: 2025-02-13 16:00:00
+2025-02-12 14:00:29,067 - INFO - End: 2025-02-13 18:00:00
+2025-02-12 14:00:29,616 - INFO - ✅ Successfully created event:
+2025-02-12 14:00:29,617 - INFO -   ID: 75pg9014b8lf9ne1cc3lg11q3o
+2025-02-12 14:00:29,617 - INFO -   Link: https://www.google.com/calendar/event?eid=NzVwZzkwMTRiOGxmOW5lMWNjM2xnMTFxM28gbGkwMDI1NTdAdW1uLmVkdQ
+2025-02-12 14:00:29,617 - INFO - 
+🔍 Attempting to create event: Work on medium/low priority tasks from Kanban board
+2025-02-12 14:00:29,618 - INFO - Start: 2025-02-13 19:30:00
+2025-02-12 14:00:29,618 - INFO - End: 2025-02-13 21:30:00
+2025-02-12 14:00:30,188 - INFO - ✅ Successfully created event:
+2025-02-12 14:00:30,188 - INFO -   ID: 2c9tjo5tltv07rjj3mhfdgv1es
+2025-02-12 14:00:30,189 - INFO -   Link: https://www.google.com/calendar/event?eid=MmM5dGpvNXRsdHYwN3JqajNtaGZkZ3YxZXMgbGkwMDI1NTdAdW1uLmVkdQ
+2025-02-12 14:00:30,189 - INFO - 
+🔍 Attempting to create event: Work on daily tasks from Kanban board
+2025-02-12 14:00:30,189 - INFO - Start: 2025-02-13 22:00:00
+2025-02-12 14:00:30,189 - INFO - End: 2025-02-13 23:00:00
+2025-02-12 14:00:30,915 - INFO - ✅ Successfully created event:
+2025-02-12 14:00:30,916 - INFO -   ID: vdds9r5kk6raei1h6bkbfp8mpg
+2025-02-12 14:00:30,916 - INFO -   Link: https://www.google.com/calendar/event?eid=dmRkczlyNWtrNnJhZWkxaDZia2JmcDhtcGcgbGkwMDI1NTdAdW1uLmVkdQ
+2025-02-12 14:00:30,920 - INFO - ✅ Schedule created successfully!

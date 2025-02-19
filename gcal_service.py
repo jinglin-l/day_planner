@@ -30,32 +30,24 @@ class GoogleCalendarService:
     def _get_calendar_service(self):
         """Initialize and return the Google Calendar service."""
         creds = None
-        # Look for existing token.pickle file
-        if os.path.exists('token.pickle'):
-            with open('token.pickle', 'rb') as token:
+        # Use absolute path for token.pickle
+        token_path = os.path.join(os.path.dirname(__file__), 'token.pickle')
+        
+        if os.path.exists(token_path):
+            with open(token_path, 'rb') as token:
                 creds = pickle.load(token)
 
-        # If credentials are invalid or don't exist, try to refresh or create new ones
+        # If there are no (valid) credentials available, let the user log in
         if not creds or not creds.valid:
             if creds and creds.expired and creds.refresh_token:
-                try:
-                    creds.refresh(Request())
-                except Exception:
-                    creds = None
+                creds.refresh(Request())
+            else:
+                credentials_path = os.path.join(os.path.dirname(__file__), 'credentials.json')
+                flow = InstalledAppFlow.from_client_secrets_file(credentials_path, SCOPES)
+                creds = flow.run_local_server(port=0)
             
-            if not creds:
-                try:
-                    flow = InstalledAppFlow.from_client_secrets_file(
-                        'credentials.json', SCOPES)
-                    creds = flow.run_local_server(port=0)
-                except FileNotFoundError:
-                    raise FileNotFoundError(
-                        "credentials.json not found in day_planner directory. "
-                        "Please ensure you have downloaded your OAuth credentials file from Google Cloud Console."
-                    )
-
-            # Save the credentials for future use
-            with open('day_planner/token.pickle', 'wb') as token:
+            # Save the credentials for the next run
+            with open(token_path, 'wb') as token:
                 pickle.dump(creds, token)
 
         return build('calendar', 'v3', credentials=creds)

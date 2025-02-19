@@ -1,0 +1,131 @@
+2025-01-21 13:13:24,640 - INFO - Starting day planner script...
+2025-01-21 13:13:29,933 - ERROR - ❌ An error occurred: [Errno 2] No such file or directory: 'day_planner/token.pickle'
+2025-01-21 13:13:29,941 - ERROR - Traceback (most recent call last):
+  File "/Users/jinglinli/Documents/obsidian/day_planner/dayplanner.py", line 176, in main
+    claude_schedule = call_claude(kanban_content)
+  File "/Users/jinglinli/Documents/obsidian/day_planner/dayplanner.py", line 30, in call_claude
+    calendar_service = GoogleCalendarService()
+  File "/Users/jinglinli/Documents/obsidian/day_planner/gcal_service.py", line 18, in __init__
+    self.service = self._get_calendar_service()
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/Users/jinglinli/Documents/obsidian/day_planner/gcal_service.py", line 60, in _get_calendar_service
+    with open('day_planner/token.pickle', 'wb') as token:
+         ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'day_planner/token.pickle'
+
+2025-01-21 13:14:38,265 - INFO - Starting day planner script...
+2025-01-21 13:14:38,953 - INFO - ✅ Successfully connected to Google Calendar
+2025-01-21 13:14:38,953 - INFO - 📅 Primary Calendar ID: c_ritfi48pp9ld7atshj6uu5q6r4@group.calendar.google.com
+2025-01-21 13:14:50,602 - INFO - ✅ Successfully connected to Google Calendar
+2025-01-21 13:14:50,605 - INFO - 📅 Primary Calendar ID: c_ritfi48pp9ld7atshj6uu5q6r4@group.calendar.google.com
+2025-01-21 13:14:50,610 - INFO - 
+🔍 Attempting to create event: Email aspr/sparc people, buy e-sim for taiwan â¡ï¸
+2025-01-21 13:14:50,611 - INFO - Start: 2025-01-22 09:00:00
+2025-01-21 13:14:50,611 - INFO - End: 2025-01-22 11:00:00
+2025-01-21 13:14:51,020 - INFO - ✅ Successfully created event:
+2025-01-21 13:14:51,020 - INFO -   ID: m5025n7g435j4blllu35okqtnk
+2025-01-21 13:14:51,020 - INFO -   Link: https://www.google.com/calendar/event?eid=bTUwMjVuN2c0MzVqNGJsbGx1MzVva3F0bmsgbGkwMDI1NTdAdW1uLmVkdQ
+2025-01-21 13:14:51,021 - INFO - 
+🔍 Attempting to create event: far.ai prep â¡ï¸ 
+2025-01-21 13:14:51,021 - INFO - Start: 2025-01-22 12:00:00
+2025-01-21 13:14:51,021 - INFO - End: 2025-01-22 14:00:00
+2025-01-21 13:14:51,439 - INFO - ✅ Successfully created event:
+2025-01-21 13:14:51,440 - INFO -   ID: 7eg816iecub1ilpplq37dlb2jo
+2025-01-21 13:14:51,440 - INFO -   Link: https://www.google.com/calendar/event?eid=N2VnODE2aWVjdWIxaWxwcGxxMzdkbGIyam8gbGkwMDI1NTdAdW1uLmVkdQ
+2025-01-21 13:14:51,440 - INFO - 
+🔍 Attempting to create event: Math academy for 2 hrs
+2025-01-21 13:14:51,440 - INFO - Start: 2025-01-22 21:30:00
+2025-01-21 13:14:51,440 - INFO - End: 2025-01-22 23:00:00
+2025-01-21 13:14:51,805 - INFO - ✅ Successfully created event:
+2025-01-21 13:14:51,806 - INFO -   ID: 0ovuv67hgu5hvbl2rutqg559uo
+2025-01-21 13:14:51,806 - INFO -   Link: https://www.google.com/calendar/event?eid=MG92dXY2N2hndTVodmJsMnJ1dHFnNTU5dW8gbGkwMDI1NTdAdW1uLmVkdQ
+2025-01-21 13:14:51,807 - INFO - ✅ Schedule created successfully!
+2025-01-21 13:15:47,021 - INFO - Starting day planner script...
+2025-01-21 13:15:47,718 - INFO - ✅ Successfully connected to Google Calendar
+2025-01-21 13:15:47,718 - INFO - 📅 Primary Calendar ID: c_ritfi48pp9ld7atshj6uu5q6r4@group.calendar.google.com
+2025-01-21 13:16:00,489 - INFO - ✅ Successfully connected to Google Calendar
+2025-01-21 13:16:00,490 - INFO - 📅 Primary Calendar ID: c_ritfi48pp9ld7atshj6uu5q6r4@group.calendar.google.com
+2025-01-21 13:16:00,498 - INFO - 
+🔍 Attempting to create event: Email aspr/sparc people, buy e-sim for taiwan â¡ï¸
+2025-01-21 13:16:00,498 - INFO - Start: 2025-01-22 09:00:00
+2025-01-21 13:16:00,499 - INFO - End: 2025-01-22 11:00:00
+2025-01-21 13:16:00,953 - INFO - ✅ Successfully created event:
+2025-01-21 13:16:00,953 - INFO -   ID: oes1cs772b831v2i0ln5rfbmbg
+2025-01-21 13:16:00,954 - INFO -   Link: https://www.google.com/calendar/event?eid=b2VzMWNzNzcyYjgzMXYyaTBsbjVyZmJtYmcgbGkwMDI1NTdAdW1uLmVkdQ
+2025-01-21 13:16:00,954 - INFO - 
+🔍 Attempting to create event: far.ai prep â¡ï¸ 
+2025-01-21 13:16:00,954 - INFO - Start: 2025-01-22 12:00:00
+2025-01-21 13:16:00,954 - INFO - End: 2025-01-22 14:00:00
+2025-01-21 13:16:01,358 - INFO - ✅ Successfully created event:
+2025-01-21 13:16:01,358 - INFO -   ID: gt4us3tksn4q5cgilninqtuckg
+2025-01-21 13:16:01,358 - INFO -   Link: https://www.google.com/calendar/event?eid=Z3Q0dXMzdGtzbjRxNWNnaWxuaW5xdHVja2cgbGkwMDI1NTdAdW1uLmVkdQ
+2025-01-21 13:16:01,358 - INFO - 
+🔍 Attempting to create event: 1 hour of leetcode â¡ï¸
+2025-01-21 13:16:01,359 - INFO - Start: 2025-01-22 22:00:00
+2025-01-21 13:16:01,359 - INFO - End: 2025-01-22 23:00:00
+2025-01-21 13:16:01,714 - INFO - ✅ Successfully created event:
+2025-01-21 13:16:01,714 - INFO -   ID: e1402dk32do7n55b782u9uefps
+2025-01-21 13:16:01,714 - INFO -   Link: https://www.google.com/calendar/event?eid=ZTE0MDJkazMyZG83bjU1Yjc4MnU5dWVmcHMgbGkwMDI1NTdAdW1uLmVkdQ
+2025-01-21 13:16:01,715 - INFO - ✅ Schedule created successfully!
+2025-01-21 13:18:28,377 - INFO - Starting day planner script...
+2025-01-21 13:18:28,803 - INFO - ✅ Successfully connected to Google Calendar
+2025-01-21 13:18:28,804 - INFO - 📅 Primary Calendar ID: c_ritfi48pp9ld7atshj6uu5q6r4@group.calendar.google.com
+2025-01-21 13:18:40,369 - INFO - ✅ Successfully connected to Google Calendar
+2025-01-21 13:18:40,382 - INFO - 📅 Primary Calendar ID: c_ritfi48pp9ld7atshj6uu5q6r4@group.calendar.google.com
+2025-01-21 13:18:40,391 - INFO - 
+🔍 Attempting to create event: Email aspr/sparc people, buy e-sim for taiwan â¡ï¸
+2025-01-21 13:18:40,391 - INFO - Start: 2025-01-22 09:00:00
+2025-01-21 13:18:40,391 - INFO - End: 2025-01-22 11:00:00
+2025-01-21 13:18:40,911 - INFO - ✅ Successfully created event:
+2025-01-21 13:18:40,911 - INFO -   ID: fsr65usmhju86lcc3hav3i40qo
+2025-01-21 13:18:40,911 - INFO -   Link: https://www.google.com/calendar/event?eid=ZnNyNjV1c21oanU4NmxjYzNoYXYzaTQwcW8gbGkwMDI1NTdAdW1uLmVkdQ
+2025-01-21 13:18:40,911 - INFO - 
+🔍 Attempting to create event: far.ai prep â¡ï¸ 
+2025-01-21 13:18:40,912 - INFO - Start: 2025-01-22 12:00:00
+2025-01-21 13:18:40,912 - INFO - End: 2025-01-22 14:00:00
+2025-01-21 13:18:41,441 - INFO - ✅ Successfully created event:
+2025-01-21 13:18:41,441 - INFO -   ID: e5aapasg4h6mairmqmmca8fse8
+2025-01-21 13:18:41,442 - INFO -   Link: https://www.google.com/calendar/event?eid=ZTVhYXBhc2c0aDZtYWlybXFtbWNhOGZzZTggbGkwMDI1NTdAdW1uLmVkdQ
+2025-01-21 13:18:41,442 - INFO - 
+🔍 Attempting to create event: math academy!!! for 2 hrs
+2025-01-21 13:18:41,442 - INFO - Start: 2025-01-22 21:30:00
+2025-01-21 13:18:41,442 - INFO - End: 2025-01-22 23:00:00
+2025-01-21 13:18:41,905 - INFO - ✅ Successfully created event:
+2025-01-21 13:18:41,906 - INFO -   ID: 0ai5kpufhajjjbkhl9hg5vtt9o
+2025-01-21 13:18:41,906 - INFO -   Link: https://www.google.com/calendar/event?eid=MGFpNWtwdWZoYWpqamJraGw5aGc1dnR0OW8gbGkwMDI1NTdAdW1uLmVkdQ
+2025-01-21 13:18:41,908 - INFO - ✅ Schedule created successfully!
+2025-01-21 13:38:10,468 - INFO - Starting day planner script...
+2025-01-21 13:38:10,951 - INFO - ✅ Successfully connected to Google Calendar
+2025-01-21 13:38:10,951 - INFO - 📅 Primary Calendar ID: c_ritfi48pp9ld7atshj6uu5q6r4@group.calendar.google.com
+2025-01-21 13:38:28,081 - INFO - ✅ Successfully connected to Google Calendar
+2025-01-21 13:38:28,081 - INFO - 📅 Primary Calendar ID: c_ritfi48pp9ld7atshj6uu5q6r4@group.calendar.google.com
+2025-01-21 13:38:28,089 - INFO - 
+🔍 Attempting to create event: far.ai prep 2 hrs
+2025-01-21 13:38:28,089 - INFO - Start: 2025-01-22 09:00:00
+2025-01-21 13:38:28,089 - INFO - End: 2025-01-22 11:00:00
+2025-01-21 13:38:28,513 - INFO - ✅ Successfully created event:
+2025-01-21 13:38:28,513 - INFO -   ID: peuf0ai304feqt6loai5teifas
+2025-01-21 13:38:28,513 - INFO -   Link: https://www.google.com/calendar/event?eid=cGV1ZjBhaTMwNGZlcXQ2bG9haTV0ZWlmYXMgbGkwMDI1NTdAdW1uLmVkdQ
+2025-01-21 13:38:28,514 - INFO - 
+🔍 Attempting to create event: leetcode for 1 hr, math academy for 30 min
+2025-01-21 13:38:28,514 - INFO - Start: 2025-01-22 21:30:00
+2025-01-21 13:38:28,514 - INFO - End: 2025-01-22 23:00:00
+2025-01-21 13:38:28,919 - INFO - ✅ Successfully created event:
+2025-01-21 13:38:28,919 - INFO -   ID: ddkvb39683fgoakfcqh5i9uueo
+2025-01-21 13:38:28,919 - INFO -   Link: https://www.google.com/calendar/event?eid=ZGRrdmIzOTY4M2Znb2FrZmNxaDVpOXV1ZW8gbGkwMDI1NTdAdW1uLmVkdQ
+2025-01-21 13:38:28,921 - INFO - ✅ Schedule created successfully!
+2025-01-21 22:00:05,679 - INFO - Starting day planner script...
+2025-01-21 22:00:05,886 - ERROR - ❌ An error occurred: [Errno 2] No such file or directory: 'day_planner/token.pickle'
+2025-01-21 22:00:05,888 - ERROR - Traceback (most recent call last):
+  File "/Users/jinglinli/Documents/obsidian/day_planner/dayplanner.py", line 175, in main
+    claude_schedule = call_claude(kanban_content)
+  File "/Users/jinglinli/Documents/obsidian/day_planner/dayplanner.py", line 29, in call_claude
+    calendar_service = GoogleCalendarService()
+  File "/Users/jinglinli/Documents/obsidian/day_planner/gcal_service.py", line 18, in __init__
+    self.service = self._get_calendar_service()
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/Users/jinglinli/Documents/obsidian/day_planner/gcal_service.py", line 58, in _get_calendar_service
+    with open('day_planner/token.pickle', 'wb') as token:
+         ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'day_planner/token.pickle'
+

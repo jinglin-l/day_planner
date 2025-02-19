@@ -41,3 +41,83 @@ Systems help me create a foundation for building good habits by removing relianc
 
 // todo! 
 
+
+
+### Setting up Automated Scheduling
+
+This tool uses macOS Launch Agents to run a cron job automatically every night at 10 PM. The Launch Agent configuration:
+
+- Ensures the script only runs when network is available, and automatically retries on failure
+- Logs output to `dayplanner/dayplanner_logs/`
+
+To set up automated scheduling:
+
+1. Create a Launch Agent plist file at `~/Library/LaunchAgents/com.dayplanner.plist`
+2. Copy the following configuration (update paths for your system):
+
+```
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.dayplanner.schedule</string>
+    <key>ProgramArguments</key>
+    <array>
+        <string>/path/to/your/venv/bin/python3</string>
+        <string>/path/to/your/day_planner/dayplanner.py</string>
+    </array>
+    <key>EnvironmentVariables</key>
+    <dict>
+        <key>PATH</key>
+        <string>/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin</string>
+        <key>HOME</key>
+        <string>/Users/yourusername</string>
+    </dict>
+    <key>WorkingDirectory</key>
+    <string>/path/to/your/day_planner</string>
+    <key>StartCalendarInterval</key>
+    <dict>
+        <key>Hour</key>
+        <integer>22</integer>
+        <key>Minute</key>
+        <integer>0</integer>
+    </dict>
+    <key>StandardOutPath</key>
+    <string>/Users/yourusername/Library/Logs/dayplanner.log</string>
+    <key>StandardErrorPath</key>
+    <string>/Users/yourusername/Library/Logs/dayplanner.error.log</string>
+    <key>RunAtLoad</key>
+    <true/>
+    <key>KeepAlive</key>
+    <dict>
+        <key>NetworkState</key>
+        <true/>
+        <key>SuccessfulExit</key>
+        <false/>
+    </dict>
+    <key>ThrottleInterval</key>
+    <integer>300</integer>
+</dict>
+</plist>
+```
+
+To load the Launch Agent:
+
+```
+launchctl load ~/Library/LaunchAgents/com.dayplanner.plist
+```
+
+To temporarily pause the script, create a file at `.dayplanner_pause` in the same directory as the script. When this file exists, the script will not run.
+
+```
+touch .dayplanner_pause
+```
+
+To resume the script, delete the file:
+
+```
+rm .dayplanner_pause
+```
+
+

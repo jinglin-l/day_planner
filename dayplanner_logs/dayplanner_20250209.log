@@ -1,0 +1,20 @@
+2025-02-09 14:02:41,482 - INFO - Starting day planner script...
+2025-02-09 14:02:42,914 - INFO - ✅ Successfully connected to Google Calendar
+2025-02-09 14:02:42,914 - INFO - 📅 Primary Calendar ID: c_ritfi48pp9ld7atshj6uu5q6r4@group.calendar.google.com
+2025-02-09 14:03:19,791 - INFO - ✅ Successfully connected to Google Calendar
+2025-02-09 14:03:19,792 - INFO - 📅 Primary Calendar ID: c_ritfi48pp9ld7atshj6uu5q6r4@group.calendar.google.com
+2025-02-09 14:03:19,797 - ERROR - ❌ An error occurred: time data '09:00' does not match format '%I:%M%p'
+2025-02-09 14:03:19,805 - ERROR - Traceback (most recent call last):
+  File "/Users/jinglinli/Documents/obsidian/day_planner/dayplanner.py", line 176, in main
+    processed_schedule = preprocess_schedule(claude_schedule, tomorrow)
+  File "/Users/jinglinli/Documents/obsidian/day_planner/dayplanner.py", line 120, in preprocess_schedule
+    datetime.datetime.strptime(start_time.strip().upper(), '%I:%M%p').time()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.13/3.13.1/Frameworks/Python.framework/Versions/3.13/lib/python3.13/_strptime.py", line 676, in _strptime_datetime
+    tt, fraction, gmtoff_fraction = _strptime(data_string, format)
+                                    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.13/3.13.1/Frameworks/Python.framework/Versions/3.13/lib/python3.13/_strptime.py", line 455, in _strptime
+    raise ValueError("time data %r does not match format %r" %
+                     (data_string, format))
+ValueError: time data '09:00' does not match format '%I:%M%p'
+

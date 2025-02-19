@@ -6,6 +6,10 @@ from dotenv import load_dotenv
 from datetime import timedelta
 from gcal_service import GoogleCalendarService
 from logger_config import setup_logger
+import requests
+import google.auth.exceptions
+import time
+import sys
 
 load_dotenv()
 
@@ -22,62 +26,75 @@ def read_kanban_file(filename):
 
 
 def call_claude(kanban_content):
-    client = anthropic.Anthropic(api_key=os.environ.get("ANTHROPIC_API_KEY"))
-    print("🤖 Delegating all life decisions to Claude...")
-
+    # Add retry logic for network operations
+    max_retries = 3
+    retry_delay = 60  # seconds
     
-    calendar_service = GoogleCalendarService()
-    tomorrow = datetime.date.today() + datetime.timedelta(days=1)
-    calendar_events = calendar_service.get_events(tomorrow)
-    
-    prompt = f"""
-    Based on the following Kanban board content, calendar events, and context, create a detailed day plan for tomorrow:
+    for attempt in range(max_retries):
+        try:
+            client = anthropic.Anthropic(api_key=os.environ.get("ANTHROPIC_API_KEY"))
+            print("🤖 Delegating all life decisions to Claude...")
 
-    Kanban Board Content:
-    {kanban_content}
+            calendar_service = GoogleCalendarService()
+            tomorrow = datetime.date.today() + datetime.timedelta(days=1)
+            calendar_events = calendar_service.get_events(tomorrow)
+            
+            prompt = f"""
+            Based on the following Kanban board content, calendar events, and context, create a detailed day plan for tomorrow:
 
-    Calendar Events for {tomorrow.strftime('%Y-%m-%d')}:
-    {calendar_events}
+            Kanban Board Content:
+            {kanban_content}
 
-    Context. You MUST follow these instructions:
-    - This schedule is generated every night at 10:00pm for the following day. 
-    - Structure the day around 4 two-hour focus blocks, working around calendar events
-    - After each 2-hour focus block, take a 30-minute break
-    - Include at least one meaningful social interaction daily (e.g., coffee with a friend, quality conversation)
-    - I sleep from 12am-8:30am. I need about 30 minutes to get ready in the morning. 
-    - 11pm-12am is for my wind down time.
-    - Tasks are prioritized as high, medium, and low. Prioritize high priority tasks first, then medium, then low.
-    - There is a daily column for tasks that need to be done every day.
+            Calendar Events for {tomorrow.strftime('%Y-%m-%d')}:
+            {calendar_events}
 
-    Please create a schedule that takes into account these fixed commitments and prioritizes tasks accordingly. 
-    Format the output EXACTLY as follows. Mark focus blocks with ###:
+            Context. You MUST follow these instructions:
+            - This schedule is generated every night at 10:00pm for the following day. 
+            - Structure the day around 4 two-hour focus blocks, working around calendar events
+            - After each 2-hour focus block, take a 30-minute break
+            - Include at least one meaningful social interaction daily (e.g., coffee with a friend, quality conversation)
+            - I sleep from 12am-8:30am. I need about 30 minutes to get ready in the morning. 
+            - 11pm-12am is for my wind down time.
+            - Tasks are prioritized as high, medium, and low. Prioritize high priority tasks first, then medium, then low.
+            - There is a daily column for tasks that need to be done every day.
 
-    # Day Planner
-    - [ ] [TimeStart-TimeEnd] Regular task
-    - [ ] [TimeStart-TimeEnd] ### Focus Block: [Description]
+            Please create a schedule that takes into account these fixed commitments and prioritizes tasks accordingly. 
+            Format the output EXACTLY as follows. Mark focus blocks with ###:
 
-    # Thought Dump
+            # Day Planner
+            - [ ] [TimeStart-TimeEnd] Regular task
+            - [ ] [TimeStart-TimeEnd] ### Focus Block: [Description]
 
-    # Things I'm Grateful For...
+            # Thought Dump
 
-    # Scary thing(s) I did today...
+            # Things I'm Grateful For...
 
-    Ensure tasks are appropriately timed and include breaks. Add any necessary additional tasks or breaks to create a balanced day.
-    Do not include a date or day of the week in the output.
-    IMPORTANT: Leave the Thought Dump, Things I'm Grateful For, and Scary Things sections completely empty - do not add any content to these sections.
-    """
+            # Scary thing(s) I did today...
 
-    message = client.messages.create(
-        model="claude-3-opus-20240229",
-        max_tokens=4000,
-        temperature=0.01,
-        system="You are a helpful assistant that creates detailed daily schedules based on Kanban board content and user context.",
-        messages=[
-            {"role": "user", "content": prompt}
-        ]
-    )
+            Ensure tasks are appropriately timed and include breaks. Add any necessary additional tasks or breaks to create a balanced day.
+            Do not include a date or day of the week in the output.
+            IMPORTANT: Leave the Thought Dump, Things I'm Grateful For, and Scary Things sections completely empty - do not add any content to these sections.
+            """
 
-    return message.content
+            message = client.messages.create(
+                model="claude-3-opus-20240229",
+                max_tokens=4000,
+                temperature=0.01,
+                system="You are a helpful assistant that creates detailed daily schedules based on Kanban board content and user context.",
+                messages=[
+                    {"role": "user", "content": prompt}
+                ]
+            )
+
+            return message.content
+            
+        except (requests.exceptions.ConnectionError, google.auth.exceptions.TransportError) as e:
+            if attempt < max_retries - 1:
+                logger.warning(f"Network error occurred (attempt {attempt + 1}/{max_retries}). Retrying in {retry_delay} seconds...")
+                time.sleep(retry_delay)
+                continue
+            else:
+                raise
 
 
 def preprocess_schedule(schedule, date):
@@ -166,9 +183,23 @@ def generate_markdown():
     return markdown_content
 
 
+def should_run():
+    # Check for a "pause file" in the same directory as the script
+    pause_file = os.path.join(os.path.dirname(os.path.abspath(__file__)), '.dayplanner_pause')
+    return not os.path.exists(pause_file)
+
+
 def main():
     try:
         logger.info("Starting day planner script...")
+        
+        if not should_run():
+            logger.info("Day planner is paused. Skipping execution.")
+            return
+        
+        # Add a small delay at startup to allow network to initialize
+        time.sleep(30)  # Wait 30 seconds for network to be ready
+            
         kanban_content = read_kanban_file('kanban.md')
         tomorrow = datetime.date.today() + datetime.timedelta(days=1)
 
@@ -176,10 +207,12 @@ def main():
         processed_schedule = preprocess_schedule(claude_schedule, tomorrow)
         write_schedule_to_file(processed_schedule, tomorrow)
         logger.info("✅ Schedule created successfully!")
+        sys.exit(0)  
     except Exception as e:
         logger.error(f"❌ An error occurred: {str(e)}")
         import traceback
         logger.error(traceback.format_exc())
+        sys.exit(1) 
 
 
 if __name__ == "__main__":

@@ -1,0 +1,34 @@
+2025-02-13 14:00:06,000 - INFO - Starting day planner script...
+2025-02-13 14:00:07,004 - INFO - ✅ Successfully connected to Google Calendar
+2025-02-13 14:00:07,004 - INFO - 📅 Primary Calendar ID: c_ritfi48pp9ld7atshj6uu5q6r4@group.calendar.google.com
+2025-02-13 14:00:24,566 - INFO - ✅ Successfully connected to Google Calendar
+2025-02-13 14:00:24,568 - INFO - 📅 Primary Calendar ID: c_ritfi48pp9ld7atshj6uu5q6r4@group.calendar.google.com
+2025-02-13 14:00:24,575 - INFO - 
+🔍 Attempting to create event: csci1133 lab
+2025-02-13 14:00:24,575 - INFO - Start: 2025-02-14 09:00:00
+2025-02-13 14:00:24,576 - INFO - End: 2025-02-14 10:45:00
+2025-02-13 14:00:25,066 - INFO - ✅ Successfully created event:
+2025-02-13 14:00:25,066 - INFO -   ID: 444tohi764a1e1dm205ri5qonk
+2025-02-13 14:00:25,066 - INFO -   Link: https://www.google.com/calendar/event?eid=NDQ0dG9oaTc2NGExZTFkbTIwNXJpNXFvbmsgbGkwMDI1NTdAdW1uLmVkdQ
+2025-02-13 14:00:25,066 - INFO - 
+🔍 Attempting to create event: Work on high priority tasks from Kanban board
+2025-02-13 14:00:25,067 - INFO - Start: 2025-02-14 13:00:00
+2025-02-13 14:00:25,067 - INFO - End: 2025-02-14 15:00:00
+2025-02-13 14:00:25,636 - INFO - ✅ Successfully created event:
+2025-02-13 14:00:25,637 - INFO -   ID: 948ig33n4iou7clrg4t9ihuka0
+2025-02-13 14:00:25,637 - INFO -   Link: https://www.google.com/calendar/event?eid=OTQ4aWczM240aW91N2Nscmc0dDlpaHVrYTAgbGkwMDI1NTdAdW1uLmVkdQ
+2025-02-13 14:00:25,637 - INFO - 
+🔍 Attempting to create event: Continue working on high priority tasks
+2025-02-13 14:00:25,637 - INFO - Start: 2025-02-14 15:30:00
+2025-02-13 14:00:25,638 - INFO - End: 2025-02-14 17:30:00
+2025-02-13 14:00:26,099 - INFO - ✅ Successfully created event:
+2025-02-13 14:00:26,100 - INFO -   ID: 4plvdp3v2c4dsulrhrq80nbpq4
+2025-02-13 14:00:26,101 - INFO -   Link: https://www.google.com/calendar/event?eid=NHBsdmRwM3YyYzRkc3VscmhycTgwbmJwcTQgbGkwMDI1NTdAdW1uLmVkdQ
+2025-02-13 14:00:26,101 - INFO - 
+🔍 Attempting to create event: Work on medium priority tasks from Kanban board
+2025-02-13 14:00:26,101 - INFO - Start: 2025-02-14 19:00:00
+2025-02-13 14:00:26,101 - INFO - End: 2025-02-14 21:00:00
+2025-02-13 14:00:26,558 - INFO - ✅ Successfully created event:
+2025-02-13 14:00:26,558 - INFO -   ID: 87619oph4m00ndgie8nnl3hpr8
+2025-02-13 14:00:26,558 - INFO -   Link: https://www.google.com/calendar/event?eid=ODc2MTlvcGg0bTAwbmRnaWU4bm5sM2hwcjggbGkwMDI1NTdAdW1uLmVkdQ
+2025-02-13 14:00:26,561 - INFO - ✅ Schedule created successfully!

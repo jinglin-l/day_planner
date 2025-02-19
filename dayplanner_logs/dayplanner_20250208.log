@@ -1,0 +1,34 @@
+2025-02-08 14:05:40,705 - INFO - Starting day planner script...
+2025-02-08 14:05:41,637 - INFO - ✅ Successfully connected to Google Calendar
+2025-02-08 14:05:41,638 - INFO - 📅 Primary Calendar ID: c_ritfi48pp9ld7atshj6uu5q6r4@group.calendar.google.com
+2025-02-08 17:24:39,866 - INFO - ✅ Successfully connected to Google Calendar
+2025-02-08 17:24:39,868 - INFO - 📅 Primary Calendar ID: c_ritfi48pp9ld7atshj6uu5q6r4@group.calendar.google.com
+2025-02-08 17:24:39,872 - INFO - 
+🔍 Attempting to create event: Leetcode for 2 hours
+2025-02-08 17:24:39,872 - INFO - Start: 2025-02-09 09:00:00
+2025-02-08 17:24:39,872 - INFO - End: 2025-02-09 11:00:00
+2025-02-08 17:24:40,504 - INFO - ✅ Successfully created event:
+2025-02-08 17:24:40,505 - INFO -   ID: 5g092vlpsrbnarbhsb0gtucb58
+2025-02-08 17:24:40,505 - INFO -   Link: https://www.google.com/calendar/event?eid=NWcwOTJ2bHBzcmJuYXJiaHNiMGd0dWNiNTggbGkwMDI1NTdAdW1uLmVkdQ
+2025-02-08 17:24:40,505 - INFO - 
+🔍 Attempting to create event: Hack on LRT project for 2 hours
+2025-02-08 17:24:40,505 - INFO - Start: 2025-02-09 13:30:00
+2025-02-08 17:24:40,505 - INFO - End: 2025-02-09 15:30:00
+2025-02-08 17:24:41,118 - INFO - ✅ Successfully created event:
+2025-02-08 17:24:41,118 - INFO -   ID: g9dggi7aa6bef82qc9o2seio6o
+2025-02-08 17:24:41,118 - INFO -   Link: https://www.google.com/calendar/event?eid=ZzlkZ2dpN2FhNmJlZjgycWM5bzJzZWlvNm8gbGkwMDI1NTdAdW1uLmVkdQ
+2025-02-08 17:24:41,118 - INFO - 
+🔍 Attempting to create event: ð¯ Write interview scripts & walk backwards memorizing them â¡ï¸
+2025-02-08 17:24:41,118 - INFO - Start: 2025-02-09 16:00:00
+2025-02-08 17:24:41,119 - INFO - End: 2025-02-09 18:00:00
+2025-02-08 17:24:41,765 - INFO - ✅ Successfully created event:
+2025-02-08 17:24:41,766 - INFO -   ID: dltmerd12dbnp6r23nd8fud3fc
+2025-02-08 17:24:41,766 - INFO -   Link: https://www.google.com/calendar/event?eid=ZGx0bWVyZDEyZGJucDZyMjNuZDhmdWQzZmMgbGkwMDI1NTdAdW1uLmVkdQ
+2025-02-08 17:24:41,766 - INFO - 
+🔍 Attempting to create event: Hack on LRT project for 2 hours
+2025-02-08 17:24:41,766 - INFO - Start: 2025-02-09 18:30:00
+2025-02-08 17:24:41,766 - INFO - End: 2025-02-09 20:30:00
+2025-02-08 17:24:42,393 - INFO - ✅ Successfully created event:
+2025-02-08 17:24:42,393 - INFO -   ID: gsgi34stncp5h01d8efgdakovs
+2025-02-08 17:24:42,393 - INFO -   Link: https://www.google.com/calendar/event?eid=Z3NnaTM0c3RuY3A1aDAxZDhlZmdkYWtvdnMgbGkwMDI1NTdAdW1uLmVkdQ
+2025-02-08 17:24:42,395 - INFO - ✅ Schedule created successfully!
