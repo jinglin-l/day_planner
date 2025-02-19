@@ -10,7 +10,7 @@ Throughout my day, I maintain a Kanban board in Obsidian to capture and prioriti
 
 Each night at 10 PM, my planner:
 
-- Analyzes my Kanban board to understand my my everexpanding backlog of things I intend to do
+- Analyzes my Kanban board to understand what needs to be done and at what priority/urgency level
 - Checks my Google Calendar for existing commitments that are already scheduled
 - Consults with Claude to create a schedule for the next day
 - Automatically blocks out focused work sessions and writes them back to my Google Calendar as events
