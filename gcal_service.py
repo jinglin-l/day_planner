@@ -52,20 +52,17 @@ class GoogleCalendarService:
 
         return build('calendar', 'v3', credentials=creds)
 
-    def get_events(self, date: datetime.date) -> List[Dict]:
-        """Get calendar events for a specific date."""
-        start_of_day = datetime.datetime.combine(date, datetime.time.min).isoformat() + 'Z'
-        end_of_day = datetime.datetime.combine(date, datetime.time.max).isoformat() + 'Z'
-
+    def get_events(self, start_time, end_time):
         events_result = self.service.events().list(
             calendarId='primary',
-            timeMin=start_of_day,
-            timeMax=end_of_day,
+            timeMin=start_time.isoformat() + 'Z',
+            timeMax=end_time.isoformat() + 'Z',
             singleEvents=True,
             orderBy='startTime'
         ).execute()
-
-        return self._format_events(events_result.get('items', []))
+        
+        events = events_result.get('items', [])
+        return events
 
     def _format_events(self, events: List[Dict]) -> List[Dict]:
         """Format calendar events into a consistent structure."""

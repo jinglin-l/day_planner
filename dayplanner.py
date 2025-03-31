@@ -37,10 +37,14 @@ def call_claude(kanban_content):
 
             calendar_service = GoogleCalendarService()
             tomorrow = datetime.date.today() + datetime.timedelta(days=1)
-            calendar_events = calendar_service.get_events(tomorrow)
+            
+            # Get events specifically for tomorrow's full day
+            tomorrow_start = datetime.datetime.combine(tomorrow, datetime.time.min)
+            tomorrow_end = datetime.datetime.combine(tomorrow, datetime.time.max)
+            calendar_events = calendar_service.get_events(tomorrow_start, tomorrow_end)
             
             prompt = f"""
-            Based on the following Kanban board content, calendar events, and context, create a detailed day plan for tomorrow:
+            Based on the following Kanban board content, calendar events, and context, create a detailed day plan for {tomorrow.strftime('%Y-%m-%d')}:
 
             Kanban Board Content:
             {kanban_content}
@@ -55,7 +59,9 @@ def call_claude(kanban_content):
             - Include at least one meaningful social interaction daily (e.g., coffee with a friend, quality conversation)
             - I sleep from 12am-8:30am. I need about 30 minutes to get ready in the morning. 
             - 11pm-12am is for my wind down time.
-            - Tasks are prioritized as high, medium, and low. Prioritize high priority tasks first, then medium, then low.
+            - Tasks are prioritized as high and low. Prioritize high priority tasks first, then medium.
+            - IMPORTANT: For each focus block, choose a SPECIFIC task from the Kanban board. Do not use generic descriptions like "work on medium priority tasks". Instead, use the exact task name from the board.
+            - There is also another column for high context switching admin tasks, that all take <10 minutes each, so allocate a block of time for these.
             - There is a daily column for tasks that need to be done every day.
 
             Please create a schedule that takes into account these fixed commitments and prioritizes tasks accordingly. 
@@ -200,7 +206,7 @@ def main():
         # Add a small delay at startup to allow network to initialize
         time.sleep(30)  # Wait 30 seconds for network to be ready
             
-        kanban_content = read_kanban_file('kanban.md')
+        kanban_content = read_kanban_file('_kanban.md')
         tomorrow = datetime.date.today() + datetime.timedelta(days=1)
 
         claude_schedule = call_claude(kanban_content)
